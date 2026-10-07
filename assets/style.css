@@ -153,3 +153,6 @@ a.is-visited{color:var(--visited)!important}
   border-color:#214f67;
   color:#d9edf6 !important;
 }
+
+/* v1.0.5: post-ending teaching-space shortcut */
+.dept-space-list .language-lab-link{display:block;margin-top:5px;font-weight:700;}

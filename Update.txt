@@ -1,0 +1,8 @@
+《誠大語言文本系怪異紀錄》 v1.0.5
+
+- 首頁加入正式作品名稱 SEO / Open Graph metadata。
+- 加入 canonical URL、robots.txt 與 sitemap.xml。
+- 通關後「語言教室」入口直接連到 353 設備補充紀錄，與設備檢查中的 353 指向同一頁。
+- 保留 v1.0.4 手機版課程導覽與 v1.0.3 自訂 visited link 狀態。
+
+注意：Update.txt 是作者用版本紀錄，公開 GitHub Pages 不需要上傳。

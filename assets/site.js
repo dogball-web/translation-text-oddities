@@ -93,6 +93,7 @@
     const playDate=(ts||localStorage.getItem('chenghai_ending_date')||fmtDate()).slice(0,10);
     document.querySelectorAll('[data-play-date]').forEach(el=>el.textContent=playDate);
     document.querySelectorAll('[data-ending-only]').forEach(el=>{el.hidden=false;el.style.display='';});
+    document.querySelectorAll('[data-pre-ending-space]').forEach(el=>{el.hidden=true;el.style.display='none';});
     document.querySelectorAll('[data-figure4-reply]').forEach(el=>{el.textContent='同學好，這份教材本來就有些缺失，尤其是圖片的部分。此 caption 指向的圖片已補於新版教材，不影響成績，同學不用擔心。';});
     document.querySelectorAll('[data-figure4-box]').forEach(el=>{el.textContent='[ Figure 4 reproduced in synchronized copy ]';el.classList.add('figure-restored');});
     document.querySelectorAll('[data-ending-complete-word]').forEach(el=>el.classList.add('ending-red-word'));
