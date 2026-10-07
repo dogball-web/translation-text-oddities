@@ -17,13 +17,18 @@
 <li>If the person outside notices you first, do not wave back.</li>
 </ol>
 </section></div></div><script src="../assets/site.js"></script>
-<div class="game-reset-corner">
+<div class="game-reset-corner" id="game-reset-corner" hidden>
   <button type="button" id="clear-all-game-records" class="game-reset-button">清除所有記錄</button>
 </div>
 <script>
 (function(){
+  var corner = document.getElementById('game-reset-corner');
   var btn = document.getElementById('clear-all-game-records');
-  if(!btn) return;
+  if(!corner || !btn) return;
+  var unlocked = false;
+  try { unlocked = localStorage.getItem('chenghai_ending_applied') === '1'; } catch(e) {}
+  if(!unlocked) return;
+  corner.hidden = false;
   btn.addEventListener('click', function(){
     var ok = window.confirm('此按鈕為重啟遊戲的按鈕，確定要清除所有記錄嗎？');
     if(!ok) return;

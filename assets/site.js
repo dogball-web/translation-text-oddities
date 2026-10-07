@@ -87,6 +87,12 @@
     });
   }
 
+  // Keep pre-ending/post-ending classroom references mutually exclusive.
+  if(!ending()){
+    document.querySelectorAll('[data-ending-only]').forEach(el=>{el.hidden=true;el.style.display='none';});
+    document.querySelectorAll('[data-pre-ending-space]').forEach(el=>{el.hidden=false;el.style.display='';});
+  }
+
   // Post-ending state: quiet changes only.
   if(ending()){
     const ts=endingTimestamp();
