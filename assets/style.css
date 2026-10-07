@@ -1,0 +1,157 @@
+:root{
+  --navy:#164d70;
+  --navy2:#0f3e5d;
+  --sky:#eaf4fa;
+  --line:#c8d7e0;
+  --muted:#5c6f79;
+  --bg:#eef2f4;
+  --panel:#fff;
+  --danger:#b33b3b;
+  --danger-bg:#f9e1e1;
+  --link:#1c6eb8;
+  --archive:#7c6c43;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;color:#1c2a32}
+body{min-height:100vh}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+.browserbar{height:42px;background:#e9edf0;border-bottom:1px solid #ccd3d7;display:flex;align-items:center;padding:0 15px;font-size:13px;color:#44535c;gap:10px}
+.browser-dot{width:12px;height:12px;border-radius:50%;background:#c2c7ca;display:inline-block}.address{background:white;border:1px solid #d6dce0;border-radius:18px;padding:6px 14px;flex:1;max-width:840px;color:#55646c}
+.site-header{background:linear-gradient(100deg,#f6fbfd 0%,#edf6f8 45%,#d7e4e7 100%);border-bottom:1px solid #b6c8d2;min-height:150px;position:relative;overflow:hidden}
+.site-header::after{content:"";position:absolute;right:0;bottom:0;width:48%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.15),rgba(40,76,91,.08)),linear-gradient(90deg,transparent,rgba(84,113,122,.14));clip-path:polygon(12% 14%,100% 0,100% 100%,0 100%);opacity:.85}
+.header-inner{max-width:1280px;margin:auto;padding:28px 24px 22px;display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
+.brand{display:flex;gap:16px;align-items:center}.logo{width:80px;height:80px;border:3px solid var(--navy);border-radius:50%;position:relative;background:rgba(255,255,255,.4)}
+.logo:before,.logo:after{content:"";position:absolute;left:15px;right:15px;height:17px;border:3px solid var(--navy);border-left:0;border-right:0;border-radius:50%}
+.logo:before{top:22px;transform:rotate(7deg)}.logo:after{top:39px;transform:rotate(-7deg)}
+.brand h1{margin:0;font-family:Georgia,"Noto Serif TC",serif;font-size:34px;letter-spacing:4px;color:#103e5d;font-weight:700}.brand .en{font:17px Georgia,serif;color:#214f69;letter-spacing:.5px}.brand .motto{margin-top:7px;color:#3d5b6d;letter-spacing:4px;font-family:Georgia,"Noto Serif TC",serif}
+.header-links{text-align:right;color:#2b5b78;font-size:15px}.header-links span,.header-links a{margin-left:16px}.search{margin-top:18px;display:flex;justify-content:flex-end}.search input{width:230px;padding:7px 9px;border:1px solid #b5c5cf;border-radius:2px 0 0 2px}.search button{border:0;background:#3a718f;color:white;padding:0 12px}.decor-campus{position:absolute;right:8%;bottom:0;width:520px;height:92px;opacity:.23;background:linear-gradient(to top,#547784 0 45%,transparent 45%);clip-path:polygon(0 76%,6% 76%,6% 42%,12% 42%,12% 70%,18% 70%,18% 24%,30% 24%,30% 70%,38% 70%,38% 8%,48% 8%,48% 65%,55% 65%,55% 30%,68% 30%,68% 71%,75% 71%,75% 18%,86% 18%,86% 72%,100% 72%,100% 100%,0 100%)}
+.layout{max-width:1380px;margin:0 auto;display:grid;grid-template-columns:205px 1fr;gap:0;background:#fff;min-height:calc(100vh - 192px);box-shadow:0 1px 10px rgba(30,50,60,.1)}
+.sidebar{background:#f4f7f8;border-right:1px solid #ccd8df}.side-title{background:#2b6889;color:white;font-weight:700;padding:11px 14px;border-bottom:1px solid #1f5676}.side-item{display:block;padding:11px 14px;border-bottom:1px solid #d9e1e5;color:#254b60;background:linear-gradient(#fff,#f6f8f9);font-size:15px}.side-item.active{background:#dceff9;font-weight:700}.side-item.clickable:hover{background:#e8f5fc;text-decoration:none}.side-item.disabled{color:#71808a;cursor:default}.side-item .ico{display:inline-block;width:25px;color:#316d8d}.side-space{height:9px;background:#eef2f4;border-bottom:1px solid #d2dce2}
+.content{padding:18px 24px 50px}.crumb{color:#557387;font-size:14px;margin-bottom:14px}.course-title{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap}.course-title h2{font-size:30px;margin:0;color:#18384c}.meta{color:#51636e}.teacher{margin:6px 0 14px 155px;color:#364a56;font-size:15px}.notice{background:var(--danger-bg);border:1px solid #efcaca;color:#6f3030;padding:10px 15px;margin:10px 0 14px;display:flex;gap:12px;align-items:flex-start}.notice .meg{font-size:26px;color:var(--danger)}.notice strong{display:block;font-size:17px;color:#8f2626}.notice small{color:#6d4a4a}
+.grid{display:grid;grid-template-columns:1.15fr .95fr;gap:16px}.panel{border:1px solid #bfcfda;background:#fff;margin-bottom:16px}.panel h3{margin:0;padding:9px 11px;border-bottom:1px solid #bfd0db;color:#164e71;background:linear-gradient(#fdfefe,#eef7fb);font-size:20px}.panel .body{padding:0}.more{float:right;font-size:13px;font-weight:400;margin-top:4px}.data-table{width:100%;border-collapse:collapse;font-size:14px}.data-table th{background:#dfeaf0;color:#395766;text-align:left;font-weight:600}.data-table th,.data-table td{border:1px solid #c7d4dc;padding:7px 9px;vertical-align:top}.data-table .date{width:120px;color:#53636b}.data-table .file{font-family:Arial,sans-serif}.red{color:#ba3434;font-weight:700}.gray{color:#7a858a}.strike{text-decoration:line-through;color:#888}.box{padding:13px 15px;font-size:14px;line-height:1.7}.box ul{margin:5px 0 8px 20px;padding:0}.archive-note{border-left:4px solid #9e8b55;background:#f7f4e9;padding:10px 12px;margin:12px 0;color:#5f5537;font-size:14px}
+.page-wrap{max-width:1040px;margin:24px auto;background:#fff;border:1px solid #c9d7df;box-shadow:0 2px 9px rgba(20,40,50,.08)}.page-head{background:#eaf3f8;padding:18px 24px;border-bottom:1px solid #c4d5df}.page-head h2{margin:0;color:#174d6d}.page-body{padding:25px 28px 40px;line-height:1.8}.back{display:inline-block;margin-bottom:16px}.callout{padding:13px 15px;border:1px solid #cddce5;background:#f7fbfd;margin:16px 0}.callout.warn{background:#fff5e7;border-color:#ead1a1}.callout.danger{background:#fff0f0;border-color:#e6b9b9}.doc{font-family:Georgia,"Times New Roman",serif;max-width:760px;margin:20px auto;color:#252525}.doc h1,.doc h2{text-align:center}.doc .byline{text-align:center;color:#666;margin-bottom:34px}.doc p{text-indent:2em;line-height:1.85;font-size:17px}.doc .caption{text-align:center;font-size:14px;color:#555;font-style:italic;margin:13px 0 28px}.doc .missing-figure{height:140px;border:1px dashed #c7c7c7;background:#fbfbfb;display:flex;align-items:center;justify-content:center;color:#aaa;margin:12px 0 8px}.doc .scan-note{font:13px Arial,sans-serif;color:#8a8a8a;border-top:1px solid #ddd;margin-top:32px;padding-top:9px}.annotation{font:14px "Noto Sans TC","Microsoft JhengHei",sans-serif;background:#fffbea;border-left:3px solid #d2b65d;padding:9px 11px;margin:18px 0;color:#5e5639}.spoiler{background:#f0f0f0;color:#f0f0f0;padding:0 3px}.spoiler:hover{color:#444}.footer{font-size:12px;color:#7a878d;text-align:center;padding:18px;border-top:1px solid #d8e0e4;background:#f8fafb}.ghost-link{color:inherit;text-decoration:none}.ghost-link:hover{text-decoration:none}
+.discussion-post{border-bottom:1px solid #dbe3e7;padding:15px 0}.discussion-post:last-child{border-bottom:0}.user{font-weight:700;color:#245d7a}.stamp{color:#8a969c;font-size:12px;margin-left:8px}.reply{margin-left:28px;border-left:3px solid #e2e8eb;padding-left:12px}.tag{display:inline-block;font-size:12px;background:#e6f0f5;color:#2d6179;border-radius:10px;padding:1px 8px;margin-left:5px}.disabled-note{font-size:12px;color:#9aa3a8}.tiny{font-size:12px}.hidden-status{display:none}
+@media (max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.grid{grid-template-columns:1fr}.teacher{margin-left:0}.header-links{display:none}.site-header{min-height:128px}.brand h1{font-size:27px}.logo{width:64px;height:64px}.content{padding:15px}.browserbar{display:none}}
+
+/* v0.2 morphology practice */
+.quiz-wrap{max-width:980px}.quiz-subtitle{margin-top:5px;color:#587181;font-size:14px}.quiz-instructions{line-height:1.75}.quiz-statusbar{display:flex;justify-content:space-between;gap:12px;margin:22px 0 10px;padding:8px 12px;background:#eef5f8;border:1px solid #c7d8e1;color:#49606d;font-size:13px}.morph-card{border:1px solid #bfd0db;background:#fff;padding:28px 28px 24px;box-shadow:0 1px 4px rgba(30,60,70,.05)}.morph-label{font-size:14px;color:#6b7b84;text-align:center;margin-bottom:8px}.morph-word{display:flex;justify-content:center;align-items:flex-end;min-height:82px;white-space:nowrap;overflow-x:auto;padding:8px 4px 12px}.morph-letter{font:600 40px/1.1 Georgia,"Times New Roman",serif;color:#203b49;display:inline-flex;align-items:flex-end}.morph-gap{position:relative;width:18px;height:50px;margin:0 1px;border:0;background:transparent;padding:0;cursor:pointer;flex:0 0 18px}.morph-gap:before{content:"";position:absolute;left:8px;top:5px;bottom:5px;width:2px;background:#d9e2e6;opacity:.75}.morph-gap:hover:before{background:#7fabbf}.morph-gap.active:before{background:#1f6e96;width:3px;box-shadow:0 0 0 2px rgba(31,110,150,.08)}.morph-gap.active:after{content:"";position:absolute;left:4px;bottom:1px;width:10px;height:2px;background:#1f6e96}.seg-preview{text-align:center;min-height:32px;color:#2d4857;margin:4px 0 18px}.quiz-actions,.quiz-nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.quiz-btn{border:1px solid #9fb8c6;background:linear-gradient(#fff,#edf4f7);color:#285771;padding:8px 15px;border-radius:2px;font:14px inherit;cursor:pointer}.quiz-btn:hover:not(:disabled){background:#e5f2f8}.quiz-btn.primary{background:#2f6f91;color:#fff;border-color:#275f7d}.quiz-btn.primary:visited,.quiz-btn.primary.is-visited{color:#fff!important}.quiz-btn.primary:hover{background:#255f80;color:#fff}.quiz-btn:disabled{opacity:.45;cursor:default}.feedback-box{margin-top:18px;border:1px solid #cad8df;padding:13px 15px;line-height:1.65;font-size:14px;background:#f8fbfc}.feedback-box.correct{border-left:4px solid #5f8a68;background:#f2f8f3}.feedback-box.wrong{border-left:4px solid #b57758;background:#fff8f3}.feedback-box.neutral{border-left:4px solid #7c8e98;background:#f7f9fa}.feedback-box.recognized{border-left:4px solid #6c7380;background:#f4f5f6;color:#31383e}.system-line{font-weight:700;letter-spacing:.02em}.system-sub{font-family:"Courier New",monospace;color:#4c565c}.system-pulse{display:inline-block;margin-top:5px;font-family:"Courier New",monospace;font-size:12px;color:#697278}.quiz-nav{justify-content:space-between;margin-top:16px}.quiz-footnote{margin-top:24px;padding-top:14px;border-top:1px solid #dbe3e7;color:#5d6f79;font-size:13px}.honor-panel .honor-title{font-family:Georgia,"Noto Serif TC",serif;color:#7c5e19;font-weight:700;font-size:17px;margin-bottom:3px}.honor-panel h3{color:#725719;background:linear-gradient(#fffef8,#f6f1dd);border-bottom-color:#d8cca8}
+@media (max-width:600px){.morph-card{padding:22px 12px}.morph-letter{font-size:32px}.morph-gap{width:15px;flex-basis:15px}.quiz-statusbar{flex-direction:column}.quiz-nav{gap:8px}.quiz-nav .quiz-btn{flex:1}}
+
+/* v0.3 discussion forum */
+.forum-page{max-width:1080px}.forum-sub{margin-top:4px;color:#607681;font-size:13px}.forum-toolbar{display:flex;justify-content:space-between;align-items:center;border:1px solid #bdccd4;background:linear-gradient(#f9fbfc,#e9f0f4);padding:9px 12px;margin:4px 0 10px;font-weight:700;color:#355d73}.forum-muted{font-size:12px;font-weight:400;color:#7d8c93}.forum-list{width:100%;border-collapse:collapse;font-size:13px;border:1px solid #c4d1d8}.forum-list th{padding:8px 9px;text-align:left;background:#dfeaf0;color:#385a6b;border-bottom:1px solid #bdccd4}.forum-list td{padding:10px 9px;border-bottom:1px solid #d8e1e5;vertical-align:top}.forum-list tr:hover td{background:#fafcfd}.forum-list th:nth-child(1){width:94px}.forum-list th:nth-child(3){width:90px}.forum-list th:nth-child(4){width:48px;text-align:center}.forum-list th:nth-child(5){width:132px}.forum-list td:nth-child(4){text-align:center;color:#6d7a80}.forum-preview{color:#8a959a;font-size:12px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:480px}.forum-cat{display:inline-block;border:1px solid #b9cbd5;background:#eef5f8;color:#4b6978;padding:1px 6px;font-size:11px;border-radius:2px;white-space:nowrap}.forum-cat.cat-material{background:#fff7e8;border-color:#dfc99f;color:#82682f}.forum-cat.cat-assignment{background:#f3f0fb;border-color:#c9c0df;color:#675b85}.forum-cat.cat-practice{background:#eef7ee;border-color:#bdd3bd;color:#4d7652}.forum-cat.cat-other{background:#f2f2f2;border-color:#d0d0d0;color:#777}.thread-head{border:1px solid #bacbd4;background:#eef5f8;margin-top:4px}.thread-head h3{margin:0;padding:12px 14px 5px;color:#315c73;font-size:19px}.thread-meta{padding:0 14px 10px;color:#73858e;font-size:12px}.forum-post{display:grid;grid-template-columns:145px 1fr;border:1px solid #cbd6dc;border-top:0;background:#fff;min-height:112px}.forum-usercol{background:#f4f7f8;border-right:1px solid #d8e1e5;padding:15px 12px;text-align:center}.forum-avatar{width:42px;height:42px;margin:0 auto 7px;border:1px solid #b8c8d0;background:#e5edf1;display:flex;align-items:center;justify-content:center;color:#58717e;font-weight:700;font-size:18px}.forum-name{font-weight:700;color:#2e617a}.forum-role{display:inline-block;margin-top:4px;padding:1px 7px;background:#d9e9f1;border:1px solid #bad0dc;color:#35647b;font-size:11px}.forum-message{position:relative;padding:34px 18px 20px}.forum-stamp{position:absolute;left:18px;top:8px;color:#88959b;font-size:12px}.forum-text{font-size:14px;line-height:1.85;color:#30383c}.forum-edited{margin-top:14px;padding-top:7px;border-top:1px dotted #d5dde1;color:#9a9fa2;font-size:11px}.forum-image{display:block;max-width:520px;width:100%;height:auto;margin-top:12px;border:1px solid #d0d5d8}.forum-archive{margin-top:16px;padding:9px 12px;border:1px solid #d7dcdf;background:#f6f7f8;color:#7b858a;font-size:12px;text-align:center}@media(max-width:680px){.forum-list th:nth-child(1),.forum-list td:nth-child(1),.forum-list th:nth-child(3),.forum-list td:nth-child(3),.forum-list th:nth-child(4),.forum-list td:nth-child(4){display:none}.forum-list th:nth-child(5){width:100px}.forum-post{grid-template-columns:92px 1fr}.forum-usercol{padding:12px 7px}.forum-message{padding-left:12px;padding-right:12px}.forum-stamp{left:12px}.forum-preview{max-width:230px}}
+
+
+/* v0.4 ending state, equipment archive and corrected meme */
+.weekly-table th:nth-child(1){width:56px}.weekly-table th:nth-child(2){width:112px}.weekly-table th:nth-child(3){width:56px}.ending-update{margin-top:10px;padding-top:8px;border-top:1px dotted #c9d0d4;color:#58666e}.footer-sync{color:#6b7479}.unlocked-row td{background:#f6fbf7}.final-translation{max-width:760px;margin:28px auto 10px;border-top:1px solid #cbd7dd;padding-top:22px}.final-translation h3{color:#315c73}.final-translation blockquote{margin:16px 0;padding:14px 17px;border-left:4px solid #b6c9d3;background:#f6f9fa;font:16px/1.8 Georgia,"Times New Roman",serif}.final-translation textarea{width:100%;min-height:120px;border:1px solid #afc1cb;padding:12px;font:15px/1.7 "Noto Sans TC","Microsoft JhengHei",sans-serif;resize:vertical}.figure-restored{border-style:solid!important;color:#77858b!important;background:#f5f7f8!important}.inventory-table .inventory-active td{background:#f0f7fb}.section-title{margin-top:28px;color:#315c73}.floorplan-wrap{max-width:900px;margin:10px auto 20px}.floorplan-note{text-align:center;color:#6c7e88;font-size:12px;margin-bottom:5px}.floorplan{width:100%;height:auto;border:1px solid #cad7de;background:white}.floorplan .room{fill:#f7fafb;stroke:#8da4b0;stroke-width:2}.floorplan .room-353{fill:#e8f3f8;stroke:#2e718f;stroke-width:3;cursor:pointer}.floorplan .room-label{font-size:16px;fill:#415d6b;text-anchor:middle}.floorplan .room-small{font-size:12px;fill:#4c6d7d;text-anchor:middle}.floorplan .room-link{fill:#1b6da8;font-weight:700}.floorplan .floor-wing{font-size:13px;fill:#7e8f97}.student-note{margin:20px 0;padding:14px 16px;border:1px solid #d2d6d8;background:#f8f8f8;color:#454c50}.student-note-title{font-weight:700;margin-bottom:8px}.student-note ol{margin:0 0 0 22px;padding:0}.meme-rewrite{position:relative;display:block;max-width:520px;width:100%;margin-top:12px}.meme-rewrite .forum-image{margin:0;max-width:none;width:100%}.meme-left{position:absolute;left:0;width:60.7%;height:19.7%;background:white;display:flex;align-items:center;justify-content:center;text-align:center;color:white;font-weight:900;font-size:clamp(16px,3vw,31px);line-height:1.28;-webkit-text-stroke:2px #111;text-shadow:1px 1px 0 #111,-1px 1px 0 #111,1px -1px 0 #111,-1px -1px 0 #111;font-family:"Microsoft JhengHei","Noto Sans TC",sans-serif;pointer-events:none}.m1{top:.2%}.m2{top:20.2%}.m3{top:40.2%}.m4{top:60.2%}.m5{top:80.2%}@media(max-width:600px){.meme-left{font-size:clamp(12px,5vw,24px);-webkit-text-stroke:1.5px #111}.inventory-table{font-size:12px}}
+
+/* v0.5 usability and pacing */
+:root{--visited:#6b4c93}
+a:visited{color:var(--visited)}
+a.is-visited{color:var(--visited)!important}
+.side-item.clickable:visited,.side-item.clickable.is-visited{color:var(--visited)}
+.side-item.active,.side-item.active:visited{color:#254b60}
+.forum-list a:visited,.forum-list a.is-visited,.more:visited,.back:visited{color:var(--visited)}
+
+.semantic-check{margin-top:18px;border-top:1px solid #d6e0e5;padding-top:16px}.semantic-check[hidden]{display:none}.semantic-question{font-size:14px;color:#435d6b;margin-bottom:10px}.semantic-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.semantic-option{border:1px solid #aebfc9;background:#f9fbfc;color:#2f5265;padding:9px 11px;text-align:left;cursor:pointer;font:14px inherit}.semantic-option:hover:not(:disabled){background:#edf6fa}.semantic-option:disabled{cursor:default;opacity:.55}.semantic-option.selected{border-color:#6f7782;background:#f0f1f2;color:#30363b}.semantic-note{margin-top:10px;font-size:12px;color:#6b777e}
+@media(max-width:600px){.semantic-options{grid-template-columns:1fr}}
+
+.inventory-table tr td{background:#fff}.inventory-table tr:hover td{background:#fafcfd}.inventory-table a{font-weight:400}.inventory-table .room-number-link{font-weight:700}.floorplan .room-353{fill:#f7fafb;stroke:#8da4b0;stroke-width:2;cursor:pointer}.floorplan a:hover .room-353{fill:#eef6fa;stroke:#5d879a}.floorplan .room-link{fill:#415d6b;font-weight:400}.floorplan a:hover .room-link{fill:#1b6da8;text-decoration:underline}.student-note summary{cursor:pointer;font-weight:700;color:#4e5f67}.student-note[open] summary{margin-bottom:8px}.student-note ol{margin-top:8px}
+
+.post-ending-edit{display:none;margin-top:8px;color:#9a9fa2;font-size:11px}.post-ending-edit.visible{display:block}.soft-changed{background:#fbfcfd}
+
+
+/* v0.7 forum pagination and class-life threads */
+.forum-pagination{display:flex;align-items:center;gap:6px;margin:14px 0 0;flex-wrap:wrap}.forum-pagination .page-current,.forum-pagination .page-disabled{display:inline-flex;min-width:30px;height:30px;align-items:center;justify-content:center;border:1px solid #c3d0d7;background:#f8fafb;font-size:13px}.forum-pagination .page-current{background:#315f77;color:#fff;border-color:#315f77;font-weight:700}.forum-pagination .page-disabled{color:#a0a8ad;background:#f2f3f4;cursor:default}.forum-pagination .page-note{margin-left:6px;color:#7d8b92;font-size:12px}.forum-list td:nth-child(4){font-variant-numeric:tabular-nums}
+
+
+/* v0.8 department separation, persistent quiz records and quiet ending edits */
+.ending-red-word{color:#b9252f;font-weight:700}.ending-edit-time{color:#9b4c52}.quiz-history{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:0 0 12px;padding:8px 10px;border:1px solid #d4dfe4;background:#fafcfd}.history-label{font-size:12px;color:#718089;margin-right:4px}.history-item{display:inline-flex;align-items:center;gap:4px;border:1px solid #c6d3da;background:#fff;color:#536b77;padding:3px 7px;font:12px inherit;cursor:pointer}.history-item span{font-weight:700}.history-item.correct span{color:#507e5c}.history-item.wrong span{color:#a85c43}.history-item.pending span{color:#a0aaaf}.history-item.current{outline:2px solid rgba(37,102,136,.18);border-color:#6f9bb2}.department-shell{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:210px 1fr;background:#fff;min-height:720px;box-shadow:0 1px 10px rgba(30,50,60,.1)}.department-nav{background:#f4f7f8;border-right:1px solid #ccd8df}.department-content{padding:22px 26px 48px}.department-title{border-bottom:1px solid #cbd7dd;padding-bottom:12px;margin-bottom:18px}.department-title h2{margin:0 0 4px;color:#18384c;font-size:29px}.department-title div{color:#637680;font:15px Georgia,serif}.dept-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.department-static{color:#4c6470}.dept-space-list{display:grid;grid-template-columns:1fr;gap:5px;margin-top:10px;color:#4e6875}.dept-links{display:grid;gap:7px}.dept-links span{color:#7b878c}.west-building-panel h3{background:linear-gradient(#fdfefe,#f1f5f7)}.west-title{font-weight:700;color:#315c73;margin-bottom:2px}.west-plan-wrap{margin-top:12px}.west-plan{width:100%;height:auto;background:#fff;border:1px solid #c7d4dc}.west-outline{fill:#fbfcfd;stroke:#7c98a7;stroke-width:3}.west-corridor{fill:#eef3f5;stroke:#9aadb7;stroke-width:2}.west-room{fill:#f8fafb;stroke:#8ea5b0;stroke-width:2}.west-label,.west-corridor-label{font-size:14px;fill:#425e6b;text-anchor:middle}.west-corridor-label{fill:#788991}.west-connector{stroke:#879ea9;stroke-width:3;stroke-dasharray:7 5}.west-note{font-size:11px;fill:#7b8c94}.department-notice{max-width:980px}.singing-lead{padding:16px 18px;background:#eef6fa;border-left:4px solid #327399;margin:4px 0 18px;line-height:1.8}.contest-table th{width:125px}.contest-prize{text-align:center;margin:20px 0 12px;font-size:22px;font-weight:800;color:#b15c2e;letter-spacing:2px}.contest-poster{display:block;width:min(100%,760px);height:auto;margin:0 auto;border:1px solid #cbd4d9;box-shadow:0 2px 8px rgba(30,50,60,.12)}
+@media(max-width:900px){.department-shell{grid-template-columns:1fr}.department-nav{display:none}.dept-grid{grid-template-columns:1fr}.department-content{padding:16px}.quiz-history{overflow-x:auto;flex-wrap:nowrap}.history-item{flex:0 0 auto}}
+
+/* v0.9 */
+.scan-sheet{position:relative;margin:22px auto;padding:28px 34px 54px;max-width:720px;min-height:330px;background:#f7f4e9;border:1px solid #cfc7b3;box-shadow:0 2px 7px rgba(0,0,0,.08);font-family:Georgia,"Times New Roman",serif;color:#3f403b;overflow:hidden}
+.scan-title{font-weight:700;border-bottom:1px solid #bbb4a3;padding-bottom:8px;margin-bottom:18px}
+.pencil-note,.pencil-question{font-family:"Comic Sans MS","Bradley Hand",cursive;color:#66645f;opacity:.68;transform:rotate(-2deg);margin:18px 0 0 55%}
+.pencil-note.p2{margin-left:62%;transform:rotate(1deg)}.pencil-note.p3{margin-left:49%;transform:rotate(-1deg)}
+.pencil-question{margin:34px 0 0 18%;font-size:18px;opacity:.76;transform:rotate(-1deg)}
+.scan-footer{position:absolute;left:34px;bottom:18px;font-size:12px;color:#777267;letter-spacing:.02em}
+.morph-hint{margin-top:12px;padding:10px 12px;border-top:1px dotted #b9a98a;background:#fffaf0;color:#514936}
+.ending-course-room,.ending-room-history{margin-top:18px}.compact-table{margin-top:8px}
+
+/* v0.9.1 */
+.ta-role{background:#e7eef7;border-color:#9eb0c5;color:#3e5874}
+.inline-role{display:inline-block;margin-left:4px;padding:1px 5px;border:1px solid #aebbc9;background:#edf2f7;color:#49617a;font-size:10px;line-height:1.25;vertical-align:1px}
+.inspection-warning{position:fixed;left:50%;bottom:28px;z-index:99999;max-width:min(620px,calc(100vw - 36px));transform:translate(-50%,12px);padding:10px 14px;border:1px solid #8e8e8e;background:#f3f3ef;color:#222;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
+.inspection-warning.show{opacity:1;transform:translate(-50%,0)}
+
+/* v0.9.2 */
+.pencil-note.p4{margin-left:34%;margin-top:20px;transform:rotate(.6deg);opacity:.61}
+.classroom-use-notes{margin:20px 0;padding:16px 18px;border:1px solid #c7c7c7;background:#fafafa;color:#333}
+.classroom-use-notes h3{margin-top:0;font-size:16px;font-weight:600}
+.plain-notes{margin:12px 0 0;padding-left:24px}
+.plain-notes li{margin:7px 0;line-height:1.55}
+
+/* v0.9.4 — photographed teacher morphology notes */
+.teacher-note-photo{margin:22px auto 10px;max-width:920px}
+.teacher-note-photo img{display:block;width:100%;height:auto;border:1px solid #b9b9b2;background:#eee;box-shadow:0 1px 4px rgba(0,0,0,.16)}
+.teacher-note-photo figcaption{margin-top:7px;font-size:12px;color:#666;line-height:1.5}
+
+/* v0.9.6 — recognized anomalous morphology state */
+.morph-row.locked .status,.question.locked .status,[data-locked="true"] .status{
+  font-weight:700;
+}
+
+/* v0.9.7 — post-ending restart control, shown only on Room 353 */
+.game-reset-corner{
+  position:fixed;
+  right:18px;
+  bottom:16px;
+  z-index:30;
+}
+.game-reset-button{
+  font:700 20px Arial, sans-serif;
+  color:#a33a32;
+  background:#fff8f7;
+  border:2px solid #b85a50;
+  border-radius:2px;
+  padding:9px 14px;
+  cursor:pointer;
+}
+.game-reset-button:hover{
+  color:#7d211b;
+  background:#fff;
+  border-color:#963c34;
+}
+
+
+/* v0.9.8 — department landing recruitment banner */
+.dept-recruit-banner{margin:0 0 16px;padding:18px 22px;border:1px solid #b8c6d1;background:#edf3f7;text-align:center;box-shadow:0 1px 0 rgba(255,255,255,.8) inset}
+.dept-recruit-en{font-family:Georgia,"Times New Roman",serif;font-size:19px;letter-spacing:.7px;color:#29475c;font-weight:700}
+.dept-recruit-zh{margin-top:8px;font-size:18px;font-weight:700;color:#304a5b}
+.dept-recruit-meta{margin-top:5px;font-size:12px;color:#6a7b86;letter-spacing:.8px}
+@media(max-width:720px){.dept-recruit-banner{padding:14px 12px}.dept-recruit-en{font-size:15px;line-height:1.5}.dept-recruit-zh{font-size:16px}}
+
+/* v0.9.9 — blind-test fixes */
+.history-item.recognized span{color:#59636b;font-weight:800}
+.semantic-required{margin-top:10px;padding:9px 11px;border-left:3px solid #7b8790;background:#f4f6f7;color:#4d5960;font-size:13px}
+.morph-complete-panel{margin-top:22px;border-left:4px solid #66737b;background:#f5f7f8}
+.morph-complete-panel[hidden]{display:none}
+.morph-complete-action{margin-top:12px}
+.morph-complete-action .quiz-btn{display:inline-block;text-decoration:none}
+
+/* v0.9.10 interdisciplinary program */
+.program-basic th{white-space:nowrap}.program-copy p{margin:0 0 10px;line-height:1.8}.program-goals{margin:0;padding-left:22px;line-height:1.8}.program-map td,.program-map th{vertical-align:top}.program-map .program-highlight td{background:#f2f6f8}.program-map a{font-weight:700}.dept-links a{display:block;margin-bottom:7px}
+
+/* v0.9.11 — cross-disciplinary course framing and blind-test flow fixes */
+.featured-course-head{display:flex;flex-direction:column;gap:3px;margin-bottom:10px}.featured-course-head strong{font-size:17px;color:#315b72}.featured-course-head span{font-size:12px;color:#6d7d86}.featured-course-panel p{margin:8px 0;line-height:1.8}.featured-course-action,.ending-record-action{margin-top:10px}.featured-course-action a,.ending-record-action a{font-weight:700}.ending-record-panel{border-color:#aebfc9}.west-room-353{fill:#f2f7f9;stroke:#6f8f9e;stroke-width:2.5}.west-note-center{text-anchor:middle}.anomaly-progress{margin:2px 0 16px;padding:11px 14px;border-left:4px solid #7a8991;background:#f3f5f6;color:#46545c;font:700 17px/1.45 "Courier New",monospace;letter-spacing:.01em}.anomaly-progress[hidden]{display:none}.anomaly-progress.complete{border-left-color:#5e7078;background:#f1f4f5;color:#3d4b52}.system-complete{display:inline-block;margin-top:8px;color:#4a555b}.ending-return{margin-top:14px}.ending-return .quiz-btn{display:inline-block;text-decoration:none}
+
+/* v1.0 — discussion department labels */
+.forum-dept{display:inline-block;margin-top:4px;color:#829097;font-size:10px;line-height:1.25}.inline-dept{display:inline-block;color:#89959a;font-size:10px;line-height:1.2;margin-top:2px}.forum-image{max-width:620px}.forum-usercol .forum-role{display:block;width:max-content;margin-left:auto;margin-right:auto}
+
+/* v1.0.2: keep visited-state actions legible on the Final Translation page only. */
+.final-translation a.quiz-btn.primary:visited,
+.final-translation a.quiz-btn.primary.is-visited{
+  background:#285f7b;
+  border-color:#214f67;
+  color:#d9edf6 !important;
+}

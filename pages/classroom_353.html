@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>353 電腦教室｜設備備註</title><link rel="stylesheet" href="../assets/style.css"></head><body data-requires-ending data-lock-back="../index.html"><div class="page-wrap"><div class="page-head"><h2>353 電腦教室｜設備補充紀錄</h2></div><div class="page-body"><a class="back" href="classroom_inventory.html">← 回教室設備檢查</a><p class="gray">設備組內部備註｜文教樓三樓</p><table class="data-table"><tr><th>類型</th><td>電腦／語言教室</td></tr><tr><th>座位</th><td>40</td></tr><tr><th>設備</th><td>桌上型電腦、投影、音響、遮光簾</td></tr><tr><th>最近改善</th><td>2018/01　北側窗面遮光簾更換</td></tr></table>
+<section class="ending-room-history"><h3>歷年使用課程</h3>
+<table class="data-table"><tr><th>課程</th><th>時段</th><th>備註</th></tr>
+<tr><td>翻譯實務</td><td>星期五 09:10–12:00</td><td>遠距教學期間除外</td></tr>
+<tr><td>語音與聽講練習</td><td>星期二 13:10–15:00</td><td>一般排課</td></tr></table></section>
+<div class="callout"><strong>管理備註：</strong>為避免螢幕反光與視覺干擾，上課期間請維持北側紅色遮光簾完全閉合。如遮光簾脫軌或無法密合，請通知設備組。</div>
+<section class="classroom-use-notes">
+<h3>Room 353 — Notes for Classroom Use</h3>
+<p class="tiny gray">Language Laboratory / Internal Notes</p>
+<ol class="plain-notes">
+<li>Keep the red curtains fully closed during class. This reduces screen glare and visual distraction.</li>
+<li>Check the curtains before using the projector.</li>
+<li>If you see someone in the classroom across the courtyard, check whether the same person is still inside Room 353.</li>
+<li>If they are, close the curtain.</li>
+<li>Do not ask the person to look outside.</li>
+<li>Do not tell them who you saw.</li>
+<li>If the person outside notices you first, do not wave back.</li>
+</ol>
+</section></div></div><script src="../assets/site.js"></script>
+<div class="game-reset-corner">
+  <button type="button" id="clear-all-game-records" class="game-reset-button">清除所有記錄</button>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('clear-all-game-records');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var ok = window.confirm('此按鈕為重啟遊戲的按鈕，確定要清除所有記錄嗎？');
+    if(!ok) return;
+    try { localStorage.clear(); } catch(e) {}
+    try { sessionStorage.clear(); } catch(e) {}
+    window.location.href = '../index.html';
+  });
+})();
+</script>
+</body></html>
