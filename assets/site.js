@@ -150,6 +150,20 @@
     const topicLimit=currentTopicLimit();
     document.querySelectorAll('[data-current-topic-count]').forEach(el=>el.textContent=String(topicLimit));
     document.querySelectorAll('[data-current-topic-row]').forEach((row,index)=>{row.hidden=index>=topicLimit;row.style.display=index>=topicLimit?'none':'';});
+    // Department notices also move to the player's present after the ending.
+    const deptNoticeSets={
+      winter:['寒假系辦服務時間調整','下學期選課與加退選提醒','海外交換資料補件通知','語文中心寒假開放時間'],
+      summer:['暑期系辦服務時間調整','暑期課程教室異動通知','海外交換資料補件通知','語文中心暑期開放時間'],
+      regular:['系辦臨時服務時間調整','語文中心自習空間開放時間','海外交換說明會報名資訊','校內英語活動報名通知']
+    };
+    const ap=academicParts();
+    const noticeKind=ap.type==='winter'?'winter':(ap.type==='summer'?'summer':'regular');
+    const noticeOffsets=[-3,-10,-18,-27];
+    document.querySelectorAll('[data-department-announcements]').forEach(table=>{
+      const titles=deptNoticeSets[noticeKind];
+      const rows=noticeOffsets.map((off,i)=>{const d=endingDateObject();d.setDate(d.getDate()+off);return `<tr><td>${fmtDate(d)}</td><td><span class="department-static">${titles[i]}</span></td></tr>`;}).join('');
+      table.innerHTML='<tr><th>日期</th><th>標題</th></tr>'+rows;
+    });
     if(document.body.hasAttribute('data-current-discussion-page'))document.title='討論區｜翻譯實務（'+shortBoardLabel().replace(' 討論區','')+'）';
     if(/course_current\.html$/i.test(location.pathname))document.title='翻譯實務｜'+academicLabel()+'｜誠海人文大學';
   }
