@@ -160,3 +160,7 @@ a.is-visited{color:var(--visited)!important}
 
 /* v1.0.6 — ending-only visibility guard */
 [data-ending-only][hidden], .game-reset-corner[hidden]{display:none !important;}
+
+/* v1.1.0 — post-ending current discussion board */
+.discussion-board-switch{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 14px;padding:9px 10px;border:1px solid #c6d3da;background:#f5f8fa}.board-switch-label{font-size:12px;color:#6f8088;margin-right:2px}.board-switch-item{display:inline-flex;align-items:center;min-height:30px;padding:5px 9px;border:1px solid #bdcbd2;background:white;font-size:12px;text-decoration:none}.board-switch-item.current{background:#315f77;color:white;border-color:#315f77;font-weight:700}.discussion-version-links{display:grid;gap:8px}.discussion-version-links>a{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:9px 10px;border:1px solid #c7d3d9;background:#f8fafb;text-decoration:none}.discussion-version-links>a span{font-size:11px;color:#7a898f;white-space:nowrap}.current-discussion-panel .gray{margin-top:4px}.current-discussion-panel a.is-visited,.discussion-board-switch a.is-visited{color:var(--visited)}
+@media(max-width:600px){.discussion-board-switch{align-items:stretch}.board-switch-label{width:100%}.board-switch-item{flex:1 1 auto;justify-content:center}.discussion-version-links>a{align-items:flex-start;flex-direction:column;gap:2px}}

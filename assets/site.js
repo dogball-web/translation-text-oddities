@@ -17,6 +17,60 @@
     return ts||'';
   };
 
+  const parseStoredTimestamp=(ts)=>{
+    const m=(ts||'').match(/^(\d{4})\/(\d{2})\/(\d{2})\s+(\d{2}):(\d{2})$/);
+    if(!m)return new Date();
+    return new Date(Number(m[1]),Number(m[2])-1,Number(m[3]),Number(m[4]),Number(m[5]),0,0);
+  };
+  const endingDateObject=()=>parseStoredTimestamp(endingTimestamp());
+  const academicParts=(d=endingDateObject())=>{
+    const month=d.getMonth()+1, day=d.getDate(), year=d.getFullYear();
+    // Current-course display follows a plausible Taiwan academic calendar.
+    // Jan 1–15: first semester; Jan 16–Feb 15: winter intensive;
+    // Feb 16–Jun 30: second semester; Jul–Aug: summer intensive; Sep–Dec: first semester.
+    if(month===1 && day<=15)return {roc:year-1912,type:'semester',sem:1};
+    if((month===1 && day>=16) || (month===2 && day<=15))return {roc:year-1912,type:'winter'};
+    if((month===2 && day>=16) || (month>=3 && month<=6))return {roc:year-1912,type:'semester',sem:2};
+    if(month===7 || month===8)return {roc:year-1912,type:'summer'};
+    return {roc:year-1911,type:'semester',sem:1};
+  };
+  const academicLabel=(d=endingDateObject())=>{
+    const p=academicParts(d);
+    if(p.type==='winter')return `${p.roc}學年度寒假加開`;
+    if(p.type==='summer')return `${p.roc}學年度暑期加開`;
+    return `${p.roc}學年度第${p.sem}學期`;
+  };
+  const shortBoardLabel=(d=endingDateObject())=>{
+    const p=academicParts(d);
+    if(p.type==='winter')return `${p.roc}寒假 討論區`;
+    if(p.type==='summer')return `${p.roc}暑期 討論區`;
+    return `${p.roc}-${p.sem} 討論區`;
+  };
+  const currentTopicLimit=(d=endingDateObject())=>{
+    const p=academicParts(d);
+    return p.type==='winter'?4:(p.type==='summer'?5:7);
+  };
+  const currentRelativeDay=(raw,d=endingDateObject())=>{
+    const p=academicParts(d);
+    const rankMap=new Map([[0,0],[-6,1],[-14,2],[-21,3],[-27,4],[-35,5],[-42,6]]);
+    const rawNum=Number(raw||0), rank=rankMap.has(rawNum)?rankMap.get(rawNum):null;
+    if(rank===null)return rawNum;
+    if(p.type==='winter')return [0,-5,-10,-15,-20,-25,-30][rank];
+    if(p.type==='summer')return [0,-6,-12,-18,-24,-30,-36][rank];
+    return rawNum;
+  };
+  const relativeStamp=(dayOffset=0,timeText='')=>{
+    const d=endingDateObject();
+    d.setDate(d.getDate()+Number(dayOffset||0));
+    if(timeText){const m=timeText.match(/^(\d{1,2}):(\d{2})$/);if(m){d.setHours(Number(m[1]),Number(m[2]),0,0);}}
+    return fmtTimestamp(d);
+  };
+  const relativeMinuteStamp=(minuteOffset=0)=>{
+    const d=endingDateObject();
+    d.setMinutes(d.getMinutes()+Number(minuteOffset||0));
+    return fmtTimestamp(d);
+  };
+
   // Inspection deterrence is handled by the staged guard below.
   // Initially only morphology_practice.html is protected.
   // After all anomalous analyses are recognized, protection becomes site-wide.
@@ -87,10 +141,23 @@
     });
   }
 
+  // Current-course discussion dates are derived from the player's fixed ending timestamp.
+  if(ending()){
+    document.querySelectorAll('[data-current-academic-label]').forEach(el=>el.textContent=academicLabel());
+    document.querySelectorAll('[data-current-board-label]').forEach(el=>el.textContent=shortBoardLabel());
+    document.querySelectorAll('[data-relative-day]').forEach(el=>el.textContent=relativeStamp(currentRelativeDay(el.getAttribute('data-relative-day')),el.getAttribute('data-time')||''));
+    document.querySelectorAll('[data-relative-minute]').forEach(el=>el.textContent=relativeMinuteStamp(el.getAttribute('data-relative-minute')));
+    const topicLimit=currentTopicLimit();
+    document.querySelectorAll('[data-current-topic-count]').forEach(el=>el.textContent=String(topicLimit));
+    document.querySelectorAll('[data-current-topic-row]').forEach((row,index)=>{row.hidden=index>=topicLimit;row.style.display=index>=topicLimit?'none':'';});
+    if(document.body.hasAttribute('data-current-discussion-page'))document.title='討論區｜翻譯實務（'+shortBoardLabel().replace(' 討論區','')+'）';
+  }
+
   // Keep pre-ending/post-ending classroom references mutually exclusive.
   if(!ending()){
     document.querySelectorAll('[data-ending-only]').forEach(el=>{el.hidden=true;el.style.display='none';});
     document.querySelectorAll('[data-pre-ending-space]').forEach(el=>{el.hidden=false;el.style.display='';});
+    document.querySelectorAll('[data-pre-ending-space-panel]').forEach(el=>{el.hidden=false;el.style.display='';});
   }
 
   // Post-ending state: quiet changes only.
@@ -100,6 +167,7 @@
     document.querySelectorAll('[data-play-date]').forEach(el=>el.textContent=playDate);
     document.querySelectorAll('[data-ending-only]').forEach(el=>{el.hidden=false;el.style.display='';});
     document.querySelectorAll('[data-pre-ending-space]').forEach(el=>{el.hidden=true;el.style.display='none';});
+    document.querySelectorAll('[data-pre-ending-space-panel]').forEach(el=>{el.hidden=true;el.style.display='none';});
     document.querySelectorAll('[data-figure4-reply]').forEach(el=>{el.textContent='同學好，這份教材本來就有些缺失，尤其是圖片的部分。此 caption 指向的圖片已補於新版教材，不影響成績，同學不用擔心。';});
     document.querySelectorAll('[data-figure4-box]').forEach(el=>{el.textContent='[ Figure 4 reproduced in synchronized copy ]';el.classList.add('figure-restored');});
     document.querySelectorAll('[data-ending-complete-word]').forEach(el=>el.classList.add('ending-red-word'));
