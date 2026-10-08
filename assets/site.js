@@ -151,6 +151,7 @@
     document.querySelectorAll('[data-current-topic-count]').forEach(el=>el.textContent=String(topicLimit));
     document.querySelectorAll('[data-current-topic-row]').forEach((row,index)=>{row.hidden=index>=topicLimit;row.style.display=index>=topicLimit?'none':'';});
     if(document.body.hasAttribute('data-current-discussion-page'))document.title='討論區｜翻譯實務（'+shortBoardLabel().replace(' 討論區','')+'）';
+    if(/course_current\.html$/i.test(location.pathname))document.title='翻譯實務｜'+academicLabel()+'｜誠海人文大學';
   }
 
   // Keep pre-ending/post-ending classroom references mutually exclusive.
@@ -168,6 +169,7 @@
     document.querySelectorAll('[data-ending-only]').forEach(el=>{el.hidden=false;el.style.display='';});
     document.querySelectorAll('[data-pre-ending-space]').forEach(el=>{el.hidden=true;el.style.display='none';});
     document.querySelectorAll('[data-pre-ending-space-panel]').forEach(el=>{el.hidden=true;el.style.display='none';});
+    document.querySelectorAll('.pre-ending-course-link').forEach(el=>{el.hidden=true;el.style.display='none';});
     document.querySelectorAll('[data-figure4-reply]').forEach(el=>{el.textContent='同學好，這份教材本來就有些缺失，尤其是圖片的部分。此 caption 指向的圖片已補於新版教材，不影響成績，同學不用擔心。';});
     document.querySelectorAll('[data-figure4-box]').forEach(el=>{el.textContent='[ Figure 4 reproduced in synchronized copy ]';el.classList.add('figure-restored');});
     document.querySelectorAll('[data-ending-complete-word]').forEach(el=>el.classList.add('ending-red-word'));
