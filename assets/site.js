@@ -158,7 +158,7 @@
     };
     const ap=academicParts();
     const noticeKind=ap.type==='winter'?'winter':(ap.type==='summer'?'summer':'regular');
-    const noticeOffsets=[-3,-10,-18,-27];
+    const noticeOffsets=[-8,-24,-52,-83];
     document.querySelectorAll('[data-department-announcements]').forEach(table=>{
       const titles=deptNoticeSets[noticeKind];
       const rows=noticeOffsets.map((off,i)=>{const d=endingDateObject();d.setDate(d.getDate()+off);return `<tr><td>${fmtDate(d)}</td><td><span class="department-static">${titles[i]}</span></td></tr>`;}).join('');
