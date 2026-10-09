@@ -1,4 +1,21 @@
 (function(){
+  // Anonymous GA4 site traffic: page views only. No puzzle answers or form values are sent.
+  const gaId='G-9E82RENQ8S';
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){window.dataLayer.push(arguments);};
+  window.gtag('js',new Date());
+  window.gtag('config',gaId,{
+    send_page_view:true,
+    allow_google_signals:false,
+    allow_ad_personalization_signals:false
+  });
+  const analyticsScript=document.createElement('script');
+  analyticsScript.async=true;
+  analyticsScript.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(gaId);
+  document.head.appendChild(analyticsScript);
+})();
+
+(function(){
   const weirdWords=['misremembered','remembership','represence','miswhere','displacement','mispresence','unseeing','refamiliar'];
   const allRecognized=()=>weirdWords.every(w=>localStorage.getItem('chenghai_recognized_'+w)==='1');
   const ending=()=>localStorage.getItem('chenghai_ending_applied')==='1';
