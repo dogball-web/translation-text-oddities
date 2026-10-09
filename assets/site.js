@@ -3,6 +3,10 @@
   const gaId='G-9E82RENQ8S';
   window.dataLayer=window.dataLayer||[];
   window.gtag=function(){window.dataLayer.push(arguments);};
+  // Only non-sensitive gameplay milestones. Never transmit answers or free-text.
+  window.chenghaiTrackEvent=function(name,params){
+    if(typeof window.gtag==='function')window.gtag('event',name,params||{});
+  };
   window.gtag('js',new Date());
   window.gtag('config',gaId,{
     send_page_view:true,
@@ -126,16 +130,25 @@
     // show only the archived completion state and keep the answer field blank.
     try { localStorage.removeItem('chenghai_final_translation'); } catch(e) {}
     if(ending()){input.value='';input.disabled=true;apply.disabled=true;apply.textContent='已提交';feedback.hidden=false;feedback.innerHTML='<span class="system-line">Your response has been recorded.</span><br><span class="system-pulse">Your translation has been applied.</span><br><span class="system-complete">This archived exercise is now complete.</span>';}
+    let inputStarted=false;
+    input.addEventListener('input',()=>{
+      if(!inputStarted && input.value.trim()){
+        inputStarted=true;
+        window.chenghaiTrackEvent('translation_started');
+      }
+    });
     apply.addEventListener('click',()=>{
       const value=input.value.trim();
       const normalized=value.replace(/\s+/g,' ').toLowerCase();
+      const translationLength=(value.match(/[\\u3400-\\u4dbf\\u4e00-\\u9fff]/g)||[]).length;
+      window.chenghaiTrackEvent('translation_submitted',{character_count:translationLength});
       const metaReplies={
         '翻譯':'That is how you know me.',
         '中文翻譯':'That is the language in which you know me.',
         'translation':'That is what you call me.',
         'chinese translation':'That is how you have chosen to read me.'
       };
-      if(metaReplies[normalized]){feedback.className='feedback-box recognized';feedback.hidden=false;feedback.textContent=metaReplies[normalized];return;}
+      if(metaReplies[normalized]){window.chenghaiTrackEvent('translation_meta_reply');feedback.className='feedback-box recognized';feedback.hidden=false;feedback.textContent=metaReplies[normalized];return;}
 
       // Generous completeness check: reject obvious non-translations, not stylistic variation.
       const han=(value.match(/[\u3400-\u4dbf\u4e00-\u9fff]/g)||[]).length;
@@ -149,8 +162,9 @@
       ];
       const conceptCount=concepts.reduce((n,re)=>n+(re.test(value)?1:0),0);
       const completeEnough = han>=15 ? conceptCount>=3 : (han>=10 && conceptCount>=4);
-      if(!completeEnough){feedback.className='feedback-box wrong';feedback.hidden=false;feedback.textContent='請完整翻譯後再提交。';return;}
+      if(!completeEnough){window.chenghaiTrackEvent('translation_rejected',{character_count:han,concept_count:conceptCount});feedback.className='feedback-box wrong';feedback.hidden=false;feedback.textContent='請完整翻譯後再提交。';return;}
       const now=new Date(),ts=fmtTimestamp(now);
+      window.chenghaiTrackEvent('translation_completed',{character_count:han});
       localStorage.setItem('chenghai_ending_applied','1');
       localStorage.setItem('chenghai_ending_timestamp',ts);
       localStorage.setItem('chenghai_ending_date',fmtDate(now));
