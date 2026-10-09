@@ -140,7 +140,7 @@
     apply.addEventListener('click',()=>{
       const value=input.value.trim();
       const normalized=value.replace(/\s+/g,' ').toLowerCase();
-      const translationLength=(value.match(/[\\u3400-\\u4dbf\\u4e00-\\u9fff]/g)||[]).length;
+      const translationLength=(value.match(/[\u3400-\u4dbf\u4e00-\u9fff]/g)||[]).length;
       window.chenghaiTrackEvent('translation_submitted',{character_count:translationLength});
       const metaReplies={
         '翻譯':'That is how you know me.',
