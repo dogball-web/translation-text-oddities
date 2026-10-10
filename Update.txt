@@ -1,3 +1,9 @@
+v1.2.2 更新
+- 清除所有記錄：從 353 教室移至目前課程討論區底部，保留確認流程。
+- 新增通關當天討論串「老師，剛剛349那邊是你嗎」，教師賴老師與 Mr. Lai 以相同身分標示回覆。
+- 讀取新討論串後，只有目前學期的教師介紹變成 Mr. Lai；2020 封存教師資料保持不變。
+- 延續 v1.2.1 的拆字、怪異回饋與已修復的平面圖。
+
 《誠大語言文本系怪異紀錄》 v1.1.2
 
 - 修正 v1.1.1 通關後看不到 2020 封存討論區／現在討論區的問題。
@@ -7,3 +13,27 @@
 - 現在版顯示西側教學樓 353 語言教室、目前討論區，以及 108-2 封存課程入口。
 - 2020 封存課程與 2020 討論區維持可回看。
 - 修正寒假／暑期加開討論串數量的 row 標記，確保只顯示該學期應有篇數。
+
+
+v1.2 試玩更新（由 v1.1.2 ZIP 建立）：
+- 每題錯誤 2 次顯示原本的 Hint。
+- 第 1–6 題累計 5 組不同錯誤拆分，怪異回應 Okay. That’s enough. 並停用前六題操作。
+- 第 7 題提交 mis / remember / ed 時加入 re-member 兩句英文。
+- 第 10 題第一次非怪異拆法，No. 並自動改成 mis / where、直接完成。
+- 第 7–14 題累計 5 次錯誤後強制觀看 disagreement 7 秒，再返回原題；僅一次。
+- 此 ZIP 的教室平面圖仍為舊版，請以 GitHub 已更新版本為準。
+
+
+v1.2.1 試玩更新：
+- 前六題的 Enough 觸發由 5 組不同錯誤改為 3 組。
+- 對齊系所首頁／系所頁與教室清冊的三樓平面圖（中庭配置；教室位置與比例一致）。
+- 其餘 v1.2 怪異事件與結局流程保持不變。
+
+
+v1.2.3
+- Disagreement interruption: force display dis / agree / ment during the seven-second watch without saving the forced selection; suppress the Enough message during the interruption.
+- Post-ending department announcements now reflect the end-date academic period (regular semester, winter, summer) rather than the archived 2021 table. Pre-ending announcements remain unchanged.
+
+[v1.2.4]
+- 現在的 Mr. Lai 教師頁：最後同步時間精確至分鐘，採玩家首次開啟 349 討論串的時間。
+- 同一遊玩紀錄下重看討論串、重整頁面不會覆寫時間；2020 年教師頁不變。

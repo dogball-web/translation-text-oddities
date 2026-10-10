@@ -1,25 +1,4 @@
 (function(){
-  // Anonymous GA4 site traffic: page views only. No puzzle answers or form values are sent.
-  const gaId='G-9E82RENQ8S';
-  window.dataLayer=window.dataLayer||[];
-  window.gtag=function(){window.dataLayer.push(arguments);};
-  // Only non-sensitive gameplay milestones. Never transmit answers or free-text.
-  window.chenghaiTrackEvent=function(name,params){
-    if(typeof window.gtag==='function')window.gtag('event',name,params||{});
-  };
-  window.gtag('js',new Date());
-  window.gtag('config',gaId,{
-    send_page_view:true,
-    allow_google_signals:false,
-    allow_ad_personalization_signals:false
-  });
-  const analyticsScript=document.createElement('script');
-  analyticsScript.async=true;
-  analyticsScript.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(gaId);
-  document.head.appendChild(analyticsScript);
-})();
-
-(function(){
   const weirdWords=['misremembered','remembership','represence','miswhere','displacement','mispresence','unseeing','refamiliar'];
   const allRecognized=()=>weirdWords.every(w=>localStorage.getItem('chenghai_recognized_'+w)==='1');
   const ending=()=>localStorage.getItem('chenghai_ending_applied')==='1';
@@ -130,25 +109,16 @@
     // show only the archived completion state and keep the answer field blank.
     try { localStorage.removeItem('chenghai_final_translation'); } catch(e) {}
     if(ending()){input.value='';input.disabled=true;apply.disabled=true;apply.textContent='已提交';feedback.hidden=false;feedback.innerHTML='<span class="system-line">Your response has been recorded.</span><br><span class="system-pulse">Your translation has been applied.</span><br><span class="system-complete">This archived exercise is now complete.</span>';}
-    let inputStarted=false;
-    input.addEventListener('input',()=>{
-      if(!inputStarted && input.value.trim()){
-        inputStarted=true;
-        window.chenghaiTrackEvent('translation_started');
-      }
-    });
     apply.addEventListener('click',()=>{
       const value=input.value.trim();
       const normalized=value.replace(/\s+/g,' ').toLowerCase();
-      const translationLength=(value.match(/[\u3400-\u4dbf\u4e00-\u9fff]/g)||[]).length;
-      window.chenghaiTrackEvent('translation_submitted',{character_count:translationLength});
       const metaReplies={
         '翻譯':'That is how you know me.',
         '中文翻譯':'That is the language in which you know me.',
         'translation':'That is what you call me.',
         'chinese translation':'That is how you have chosen to read me.'
       };
-      if(metaReplies[normalized]){window.chenghaiTrackEvent('translation_meta_reply');feedback.className='feedback-box recognized';feedback.hidden=false;feedback.textContent=metaReplies[normalized];return;}
+      if(metaReplies[normalized]){feedback.className='feedback-box recognized';feedback.hidden=false;feedback.textContent=metaReplies[normalized];return;}
 
       // Generous completeness check: reject obvious non-translations, not stylistic variation.
       const han=(value.match(/[\u3400-\u4dbf\u4e00-\u9fff]/g)||[]).length;
@@ -162,14 +132,45 @@
       ];
       const conceptCount=concepts.reduce((n,re)=>n+(re.test(value)?1:0),0);
       const completeEnough = han>=15 ? conceptCount>=3 : (han>=10 && conceptCount>=4);
-      if(!completeEnough){window.chenghaiTrackEvent('translation_rejected',{character_count:han,concept_count:conceptCount});feedback.className='feedback-box wrong';feedback.hidden=false;feedback.textContent='請完整翻譯後再提交。';return;}
+      if(!completeEnough){feedback.className='feedback-box wrong';feedback.hidden=false;feedback.textContent='請完整翻譯後再提交。';return;}
       const now=new Date(),ts=fmtTimestamp(now);
-      window.chenghaiTrackEvent('translation_completed',{character_count:han});
       localStorage.setItem('chenghai_ending_applied','1');
       localStorage.setItem('chenghai_ending_timestamp',ts);
       localStorage.setItem('chenghai_ending_date',fmtDate(now));
       input.disabled=true;apply.disabled=true;apply.textContent='已提交';feedback.className='feedback-box recognized';feedback.hidden=false;feedback.innerHTML='<span class="system-line">Your response has been recorded.</span><br><span class="system-pulse">Your translation has been applied.</span><br><span class="system-complete">This archived exercise is now complete.</span><div class="ending-return"><span class="gray tiny">Returning to Department Site…</span></div>';setTimeout(()=>{window.location.href='../index.html';},5000);
     });
+  }
+
+  // v1.2.2: reading the new thread changes only the present-day teacher record.
+  const laiChangedKey='chenghai_current_lai_349_read';
+  const laiReadTimeKey='chenghai_current_lai_349_read_timestamp';
+  if(ending() && document.body.hasAttribute('data-lai-thread')){
+    try{
+      // Record the first opening of this thread, without overwriting repeat visits.
+      if(!localStorage.getItem(laiChangedKey)){
+        localStorage.setItem(laiReadTimeKey,fmtTimestamp());
+        localStorage.setItem(laiChangedKey,'1');
+      }else if(!localStorage.getItem(laiReadTimeKey)){
+        // For players who triggered the event in v1.2.3, no earlier read-time exists.
+        localStorage.setItem(laiReadTimeKey,fmtTimestamp());
+      }
+    }catch(e){}
+  }
+  // Only the present-day teacher page displays this new synchronization timestamp.
+  if(ending() && document.body.hasAttribute('data-current-teacher')){
+    const laiReadTime=localStorage.getItem(laiReadTimeKey);
+    if(localStorage.getItem(laiChangedKey)==='1' && laiReadTime){
+      document.querySelectorAll('[data-lai-sync-time]').forEach(el=>el.textContent=laiReadTime);
+    }
+  }
+  if(ending() && localStorage.getItem(laiChangedKey)==='1'){
+    document.querySelectorAll('[data-lai-name],[data-current-lai-name]').forEach(el=>el.textContent='Mr. Lai');
+    document.querySelectorAll('[data-lai-title],[data-lai-research],[data-lai-courses]').forEach(el=>{
+      if(el.hasAttribute('data-lai-courses'))el.textContent='翻譯實務';
+      else el.textContent='—';
+    });
+    document.querySelectorAll('[data-lai-bio]').forEach(el=>el.remove());
+    if(document.body.hasAttribute('data-current-teacher'))document.title='授課教師｜Mr. Lai';
   }
 
   // Current-course discussion dates are derived from the player's fixed ending timestamp.
@@ -179,24 +180,35 @@
     document.querySelectorAll('[data-relative-day]').forEach(el=>el.textContent=relativeStamp(currentRelativeDay(el.getAttribute('data-relative-day')),el.getAttribute('data-time')||''));
     document.querySelectorAll('[data-relative-minute]').forEach(el=>el.textContent=relativeMinuteStamp(el.getAttribute('data-relative-minute')));
     const topicLimit=currentTopicLimit();
-    document.querySelectorAll('[data-current-topic-count]').forEach(el=>el.textContent=String(topicLimit));
+    document.querySelectorAll('[data-current-topic-count]').forEach(el=>el.textContent=String(topicLimit+1));
     document.querySelectorAll('[data-current-topic-row]').forEach((row,index)=>{row.hidden=index>=topicLimit;row.style.display=index>=topicLimit?'none':'';});
-    // Department notices also move to the player's present after the ending.
-    const deptNoticeSets={
-      winter:['寒假系辦服務時間調整','下學期選課與加退選提醒','海外交換資料補件通知','語文中心寒假開放時間'],
-      summer:['暑期系辦服務時間調整','暑期課程教室異動通知','海外交換資料補件通知','語文中心暑期開放時間'],
-      regular:['系辦臨時服務時間調整','語文中心自習空間開放時間','海外交換說明會報名資訊','校內英語活動報名通知']
-    };
-    const ap=academicParts();
-    const noticeKind=ap.type==='winter'?'winter':(ap.type==='summer'?'summer':'regular');
-    const noticeOffsets=[-8,-24,-52,-83];
-    document.querySelectorAll('[data-department-announcements]').forEach(table=>{
-      const titles=deptNoticeSets[noticeKind];
-      const rows=noticeOffsets.map((off,i)=>{const d=endingDateObject();d.setDate(d.getDate()+off);return `<tr><td>${fmtDate(d)}</td><td><span class="department-static">${titles[i]}</span></td></tr>`;}).join('');
-      table.innerHTML='<tr><th>日期</th><th>標題</th></tr>'+rows;
-    });
     if(document.body.hasAttribute('data-current-discussion-page'))document.title='討論區｜翻譯實務（'+shortBoardLabel().replace(' 討論區','')+'）';
     if(/course_current\.html$/i.test(location.pathname))document.title='翻譯實務｜'+academicLabel()+'｜誠海人文大學';
+  }
+
+  // The 2021 department announcements belong to the archived, pre-ending website.
+  // Once the ending is reached, show period-appropriate CURRENT announcements instead.
+  if(ending()){
+    const table=document.querySelector('[data-department-announcements]');
+    if(table){
+      const period=academicParts(), now=endingDateObject();
+      const dateBefore=(days)=>{const d=new Date(now);d.setDate(d.getDate()-days);return fmtDate(d);};
+      const yearLabel=period.roc;
+      const entries=period.type==='winter' ? [
+        ['寒假期間系辦服務時間調整','寒假期間系辦服務時間公告'],
+        ['寒假加開課程及教室使用說明','寒假課程教室使用說明'],
+        ['下學期選課與課務諮詢資訊','下學期選課資訊']
+      ] : period.type==='summer' ? [
+        ['暑假期間系辦服務時間調整','暑假期間系辦服務時間公告'],
+        ['暑期課程教室使用及設備維護','暑期教室設備維護通知'],
+        ['新學期選課與開課資訊','新學期開課資訊']
+      ] : [
+        [`${yearLabel}學年度第${period.sem}學期課程與教室資訊`,`本學期課程與教室資訊`],
+        ['系週會與系所活動通知','系週會時間公告'],
+        ['交換及跨文化學習說明會','海外交換說明會']
+      ];
+      table.innerHTML='<tr><th>日期</th><th>標題</th></tr>'+entries.map((e,i)=>`<tr><td>${dateBefore([2,9,17][i])}</td><td><span class="department-static">${e[0]}</span></td></tr>`).join('');
+    }
   }
 
   // Keep pre-ending/post-ending classroom references mutually exclusive.

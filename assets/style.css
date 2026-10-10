@@ -100,7 +100,7 @@ a.is-visited{color:var(--visited)!important}
   font-weight:700;
 }
 
-/* Restart control — shown on the current course page after the ending */
+/* v0.9.7 — post-ending restart control, shown only on Room 353 */
 .game-reset-corner{
   position:fixed;
   right:18px;
@@ -165,8 +165,11 @@ a.is-visited{color:var(--visited)!important}
 .discussion-board-switch{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 14px;padding:9px 10px;border:1px solid #c6d3da;background:#f5f8fa}.board-switch-label{font-size:12px;color:#6f8088;margin-right:2px}.board-switch-item{display:inline-flex;align-items:center;min-height:30px;padding:5px 9px;border:1px solid #bdcbd2;background:white;font-size:12px;text-decoration:none}.board-switch-item.current{background:#315f77;color:white;border-color:#315f77;font-weight:700}.discussion-version-links{display:grid;gap:8px}.discussion-version-links>a{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:9px 10px;border:1px solid #c7d3d9;background:#f8fafb;text-decoration:none}.discussion-version-links>a span{font-size:11px;color:#7a898f;white-space:nowrap}.current-discussion-panel .gray{margin-top:4px}.current-discussion-panel a.is-visited,.discussion-board-switch a.is-visited{color:var(--visited)}
 @media(max-width:600px){.discussion-board-switch{align-items:stretch}.board-switch-label{width:100%}.board-switch-item{flex:1 1 auto;justify-content:center}.discussion-version-links>a{align-items:flex-start;flex-direction:column;gap:2px}}
 
+/* v1.2: restrained anomalous responses */
+.morph-v12-voice{margin-top:9px;font-weight:600;line-height:1.9;white-space:normal;}
+.morph-v12-watching .quiz-history .history-item{pointer-events:none;}
 
-/* v1.1.3 — current-course reset placement */
-.current-course-reset-panel{margin-top:18px;}
-.current-course-reset-action{margin-top:12px;}
-.current-course-reset-action .game-reset-button{font-size:17px;font-weight:700;color:#a33a32;}
+/* v1.2.1: use the same coordinate plan as classroom inventory */
+.west-plan .west-room{fill:#f7fafb;stroke:#8da4b0;stroke-width:2}
+.west-plan .west-label{font-size:16px;fill:#415d6b;text-anchor:middle}
+.west-plan .west-note{font-size:12px;fill:#4c6d7d;text-anchor:middle}
