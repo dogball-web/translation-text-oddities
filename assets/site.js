@@ -222,7 +222,7 @@
   if(ending()){
     const ts=endingTimestamp();
     const playDate=(ts||localStorage.getItem('chenghai_ending_date')||fmtDate()).slice(0,10);
-    document.querySelectorAll('[data-play-date]').forEach(el=>el.textContent=playDate);
+    document.querySelectorAll('[data-play-date]:not([data-lai-sync-time])').forEach(el=>el.textContent=playDate);
     document.querySelectorAll('[data-ending-only]').forEach(el=>{el.hidden=false;el.style.display='';});
     document.querySelectorAll('[data-pre-ending-space]').forEach(el=>{el.hidden=true;el.style.display='none';});
     document.querySelectorAll('[data-pre-ending-space-panel]').forEach(el=>{el.hidden=true;el.style.display='none';});
