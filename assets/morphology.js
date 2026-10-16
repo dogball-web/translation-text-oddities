@@ -120,7 +120,7 @@
     if(index<6){
       const attempt=index+':'+seg;
       if(!intro.attempts.includes(attempt))intro.attempts.push(attempt);
-      if(intro.attempts.length>=3)intro.locked=true;
+      if(intro.attempts.length>=6)intro.locked=true;
       saveIntro();
       if(intro.locked){render();return true;}
     }else if(!later.shown){
