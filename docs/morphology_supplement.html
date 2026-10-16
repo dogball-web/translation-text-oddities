@@ -16,6 +16,14 @@
 <div class="callout"><strong>Example:</strong> <em>misplace</em> = put something in the wrong place.</div>
 <figure class="teacher-note-photo">
   <img src="../assets/morpheme_notes_teacher.jpg" alt="賴老師手寫的構詞拆解示例筆記">
-  <figcaption>賴老師補充：課堂上示範的構詞拆解，直接拍筆記給同學參考。</figcaption>
+  <figcaption><span data-handwritten-author>賴老師</span>補充：課堂上示範的構詞拆解，直接拍筆記給同學參考。</figcaption>
 </figure>
-</div></div><script src="../assets/site.js"></script><div class="site-version-number" style="clear:both;display:block;position:relative;width:100%;box-sizing:border-box;text-align:center;padding:15px 12px 19px;font:12px/1.5 Arial,sans-serif;color:#7b8993;">ver 1.2.6</div></body></html>
+<script>
+// The present-day site changes this caption after the ending; the archived game state remains unchanged.
+try {
+  if (localStorage.getItem('chenghai_ending_applied') === '1') {
+    document.querySelectorAll('[data-handwritten-author]').forEach(el => { el.textContent = 'Mr. Lai'; });
+  }
+} catch (e) {}
+</script>
+</div></div><script src="../assets/site.js"></script><div class="site-version-number" style="clear:both;display:block;width:100%;box-sizing:border-box;text-align:center;padding:15px 12px 19px;font:12px/1.5 Arial,sans-serif;color:#7b8993;">ver 1.2.8</div></body></html>
