@@ -173,3 +173,8 @@ a.is-visited{color:var(--visited)!important}
 .west-plan .west-room{fill:#f7fafb;stroke:#8da4b0;stroke-width:2}
 .west-plan .west-label{font-size:16px;fill:#415d6b;text-anchor:middle}
 .west-plan .west-note{font-size:12px;fill:#4c6d7d;text-anchor:middle}
+
+/* v1.2.8: visibly mark questions 1–6 after the anomaly locks them. */
+.quiz-history .history-item.early-locked{background:rgba(91,39,31,.2);border-color:rgba(91,39,31,.35);color:#30211f;}
+.quiz-history .history-item.early-locked span,.quiz-history .history-item.early-locked.correct span,.quiz-history .history-item.early-locked.wrong span,.quiz-history .history-item.early-locked.pending span{color:#502019;}
+.quiz-history .history-item.early-locked.current{outline:2px solid rgba(91,39,31,.2);border-color:#5b271f;}

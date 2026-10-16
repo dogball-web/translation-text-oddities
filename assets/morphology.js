@@ -78,9 +78,9 @@
   function save(){saved[keyFor(index)]=Array.from(boundaries);localStorage.setItem('chenghai_morph_boundaries',JSON.stringify(saved));localStorage.setItem('chenghai_morph_index',String(index));}
   function rememberFeedback(kind,html,seg,extra={}){responses[keyFor(index)]={kind,html,seg,...extra};saveResponses();renderHistory();}
   function setSemanticVisible(show,lock){semantic.hidden=!show;semantic.querySelectorAll('.semantic-option').forEach(btn=>{btn.disabled=!!lock;btn.classList.toggle('selected',!!lock&&lock.semantic===btn.dataset.sem);});const note=semantic.querySelector('#semantic-note');note.textContent='';if(lock&&lock.semantic==='object')note.textContent='Selection recorded: the object.';}
-  function renderHistory(){if(!history)return;history.innerHTML='<span class="history-label">作答紀錄</span>'+questions.map((q,i)=>{const lock=lockFor(i),r=responseFor(i);let mark='—',cls='pending';if(lock){mark='○';cls='recognized';}else if(r&&r.kind==='correct'){mark='✓';cls='correct';}else if(r&&r.kind==='wrong'){mark='✕';cls='wrong';}return `<button type="button" class="history-item ${cls}${i===index?' current':''}" data-q="${i}" title="第 ${i+1} 題：${q.word}">${i+1}<span>${mark}</span></button>`;}).join('');history.querySelectorAll('[data-q]').forEach(btn=>btn.addEventListener('click',()=>{if(watching)return;if(intro.locked){intro.noticeDismissed=true;saveIntro();}save();index=Number(btn.dataset.q);render();}));}
+  function renderHistory(){if(!history)return;history.innerHTML='<span class="history-label">作答紀錄</span>'+questions.map((q,i)=>{const lock=lockFor(i),r=responseFor(i);let mark='—',cls='pending';if(lock){mark='○';cls='recognized';}else if(r&&r.kind==='correct'){mark='✓';cls='correct';}else if(r&&r.kind==='wrong'){mark='✕';cls='wrong';}return `<button type="button" class="history-item ${cls}${i===index?' current':''}${intro.locked&&i<6?' early-locked':''}" data-q="${i}" title="第 ${i+1} 題：${q.word}">${i+1}<span>${mark}</span></button>`;}).join('');history.querySelectorAll('[data-q]').forEach(btn=>btn.addEventListener('click',()=>{if(watching)return;if(intro.locked){intro.noticeDismissed=true;saveIntro();}save();index=Number(btn.dataset.q);render();}));}
   function restoreFeedback(q,lock){
-    if(firstSixLocked(index)){feedback.className='feedback-box wrong';feedback.innerHTML=(watching||intro.noticeDismissed)?'':enough;feedback.hidden=watching||!!intro.noticeDismissed;submit.disabled=true;submit.textContent='提交分析';reset.disabled=true;setSemanticVisible(false,null);return;}
+    if(firstSixLocked(index)){feedback.className='feedback-box wrong';feedback.innerHTML=enough;feedback.hidden=!!watching;submit.disabled=true;submit.textContent='提交分析';reset.disabled=true;setSemanticVisible(false,null);return;}
     if(lock){feedback.className='feedback-box recognized';feedback.innerHTML=lock.feedback+"<br><span class='system-pulse'>This response can no longer be revised.</span>";feedback.hidden=false;submit.disabled=true;submit.textContent='已提交';reset.disabled=true;setSemanticVisible(!!q.semantic,lock);return;}
     submit.disabled=false;submit.textContent='提交分析';reset.disabled=false;setSemanticVisible(false,null);
     const r=responseFor(index),seg=segmentation();
@@ -98,12 +98,11 @@
     if(later.shown||watching)return;
     later.shown=true;saveLater();
     const original=index;
-    intro.noticeDismissed=true;saveIntro();
     save();watching=true;index=5;render();
     // The forced disagreement is itself the message: dis / agree / ment.
     boundaries=new Set([3,8]);
     renderWordOnly();
-    feedback.hidden=true;
+    feedback.hidden=true; // Suppress Enough only during the seven-second disagreement interruption.
     // Do not persist forced boundaries or replace the player's own answer.
     document.body.classList.add('morph-v12-watching');
     // Disable all navigation for the full viewing interval.
