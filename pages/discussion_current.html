@@ -12,25 +12,4 @@
 <tr data-current-topic-row><td><span class="forum-cat cat-assignment">作業</span></td><td><a href="discussion_current/assignment_format.html">作業二要傳 PDF 還是 Word</a><div class="forum-preview">系統上寫 PDF，但課堂投影片好像是 Word。</div></td><td>K<br><span class="inline-dept">文學系</span></td><td>2</td><td data-relative-day="-42" data-time="21:05">—</td></tr>
 </tbody></table>
 <div class="forum-archive">目前以訪客模式瀏覽。發文、回覆與附件上傳需使用校內帳號。</div>
-<div class="game-reset-corner" id="game-reset-corner" hidden>
-  <button type="button" id="clear-all-game-records" class="game-reset-button">清除所有記錄</button>
-</div>
-<script>
-(function(){
-  var corner = document.getElementById('game-reset-corner');
-  var btn = document.getElementById('clear-all-game-records');
-  if(!corner || !btn) return;
-  var unlocked = false;
-  try { unlocked = localStorage.getItem('chenghai_ending_applied') === '1'; } catch(e) {}
-  if(!unlocked) return;
-  corner.hidden = false;
-  btn.addEventListener('click', function(){
-    var ok = window.confirm('此按鈕為重啟遊戲的按鈕，確定要清除所有記錄嗎？');
-    if(!ok) return;
-    try { localStorage.clear(); } catch(e) {}
-    try { sessionStorage.clear(); } catch(e) {}
-    window.location.href = '../index.html';
-  });
-})();
-</script>
-</div></div><script src="../assets/site.js"></script><div class="site-version-number" style="clear:both;display:block;width:100%;box-sizing:border-box;text-align:center;padding:15px 12px 19px;font:12px/1.5 Arial,sans-serif;color:#7b8993;">ver 1.2.9</div></body></html>
+</div></div><script src="../assets/site.js"></script><div class="site-version-number" style="clear:both;display:block;width:100%;box-sizing:border-box;text-align:center;padding:15px 12px 19px;font:12px/1.5 Arial,sans-serif;color:#7b8993;">ver 1.2.10</div></body></html>
