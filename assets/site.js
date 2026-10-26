@@ -1,4 +1,9 @@
 (function(){
+  // Keep the displayed site version consistent across pages that load site.js.
+  function refreshDisplayedVersion(){document.querySelectorAll('.site-version-number').forEach(el=>{el.textContent='ver 1.2.10';});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refreshDisplayedVersion);
+  else refreshDisplayedVersion();
+
   const weirdWords=['misremembered','remembership','represence','miswhere','displacement','mispresence','unseeing','refamiliar'];
   const allRecognized=()=>weirdWords.every(w=>localStorage.getItem('chenghai_recognized_'+w)==='1');
   const ending=()=>localStorage.getItem('chenghai_ending_applied')==='1';
