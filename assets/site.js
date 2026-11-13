@@ -1,6 +1,6 @@
 (function(){
   // Keep the displayed site version consistent across pages that load site.js.
-  function refreshDisplayedVersion(){document.querySelectorAll('.site-version-number').forEach(el=>{el.textContent='ver 1.2.10';});}
+  function refreshDisplayedVersion(){document.querySelectorAll('.site-version-number').forEach(el=>{el.textContent='ver 1.3';});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',refreshDisplayedVersion);
   else refreshDisplayedVersion();
 
